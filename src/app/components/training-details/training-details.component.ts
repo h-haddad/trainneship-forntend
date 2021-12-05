@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {TrainingService} from "../../services/training.service";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
+
+import {TrainingService} from "../../services/training.service";
 import {Training} from "../../model/training.model";
 import {AuthenticationService} from "../../services/authentication.service";
 import {ReservationService} from "../../services/reservation.service";
-import {Reservation} from "../../model/reservation.model";
-import {Employee} from "../../model/employee.model";
 
 @Component({
   selector: 'app-training-details',
@@ -29,7 +28,7 @@ export class TrainingDetailsComponent implements OnInit {
               private reservationService: ReservationService) { }
 
   ngAfterViewChecked() {
-    this.checkReservation(this.currentTraining.id)
+    this.checkReservation(this.currentTraining.id);
   }
 
   ngOnInit(): void {
@@ -85,7 +84,7 @@ export class TrainingDetailsComponent implements OnInit {
 
   uploadPhoto() {
     this.progress = 0;
-    this.currentUploadFile = this.selectedFiles.item(0)
+    this.currentUploadFile = this.selectedFiles.item(0);
     this.trainingService.uploadTrainingPhoto(this.currentUploadFile, this.currentTraining.id)
       .subscribe({
         next: (event) => {
@@ -98,7 +97,7 @@ export class TrainingDetailsComponent implements OnInit {
         error: (error) => {
           alert("Problem on upload photo" + JSON.parse(error.error).message)
         }
-      })
+      });
   }
 
   checkReservation(training: number) {
@@ -108,7 +107,7 @@ export class TrainingDetailsComponent implements OnInit {
          this.isReserved = response;
        },
        error: (error) => console.log(error)
-     })
+     });
   }
 
   bookTraining(trainingId: number) {
@@ -116,6 +115,6 @@ export class TrainingDetailsComponent implements OnInit {
       .subscribe({
         next: () => {},
         error: (error) => console.log(error)
-      })
+      });
   }
 }

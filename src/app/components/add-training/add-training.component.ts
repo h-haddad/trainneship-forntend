@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+
 import {TrainingService} from "../../services/training.service";
 import {CategoryService} from "../../services/category.service";
 
@@ -29,7 +30,7 @@ export class AddTrainingComponent implements OnInit {
       duration:[1, [Validators.required, Validators.max(50)]],
       available:[true, Validators.required],
       category:["", Validators.required],
-    })
+    });
 
     this.categoryService.getAllCategories()
       .subscribe({
@@ -37,7 +38,7 @@ export class AddTrainingComponent implements OnInit {
           this.categories = data
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onSaveTraining() {
@@ -49,6 +50,6 @@ export class AddTrainingComponent implements OnInit {
           this.router.navigateByUrl("training-details/" + url)
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 }

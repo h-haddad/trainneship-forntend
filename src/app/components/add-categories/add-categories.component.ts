@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {CatalogueService} from "../../services/catalogue.service";
 import {CategoryService} from "../../services/category.service";
 
@@ -26,7 +27,7 @@ export class AddCategoriesComponent implements OnInit {
           this.categories = data
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onDeleteCategory(category) {
@@ -45,11 +46,11 @@ export class AddCategoriesComponent implements OnInit {
           }
           console.error(error)
         }
-      })
+      });
   }
 
   onNewCategory() {
-    this.mode = 'new-category'
+    this.mode = 'new-category';
   }
 
   onSaveCategory(value: any) {
@@ -62,7 +63,7 @@ export class AddCategoriesComponent implements OnInit {
           this.onGetAllCategories();
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onEditCategory(category) {
@@ -70,10 +71,10 @@ export class AddCategoriesComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.currentCategory = data;
-          this.mode = 'edit-category'
+          this.mode = 'edit-category';
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onUpdateCategory(category) {
@@ -84,6 +85,6 @@ export class AddCategoriesComponent implements OnInit {
           this.onGetAllCategories();
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 }

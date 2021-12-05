@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+
 import {TrainingService} from "../../services/training.service";
-import {Training} from "../../model/training.model";
-import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
 import {CategoryService} from "../../services/category.service";
 
 @Component({
@@ -38,7 +38,7 @@ export class EditTrainingComponent implements OnInit {
           })
         },
         error: (error) => console.error(error)
-      })
+      });
 
     this.categoryService.getAllCategories()
       .subscribe({
@@ -46,7 +46,7 @@ export class EditTrainingComponent implements OnInit {
           this.categories = data
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onUpdateTraining() {
@@ -58,7 +58,7 @@ export class EditTrainingComponent implements OnInit {
             this.router.navigate([''])
           },
           error: (error) => console.error(error)
-        })
+        });
     }
   }
 }

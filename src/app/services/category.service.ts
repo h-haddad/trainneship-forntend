@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {AuthenticationService} from "./authentication.service";
 import {Observable} from "rxjs";
+
+import {environment} from "../../environments/environment";
+
+import {AuthenticationService} from "./authentication.service";
 import {Category} from "../model/category.model";
 
 @Injectable({

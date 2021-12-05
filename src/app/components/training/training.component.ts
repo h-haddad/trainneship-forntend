@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import { Router} from "@angular/router";
+import {HttpEventType, HttpResponse} from "@angular/common/http";
+
 import {TrainingService} from "../../services/training.service";
 import {CategoryService} from "../../services/category.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {AuthenticationService} from "../../services/authentication.service";
 import {Training} from "../../model/training.model";
 
@@ -36,31 +37,31 @@ export class TrainingComponent implements OnInit {
     this.trainingService.getAllTraining()
       .subscribe({
         next: (response) => {
-          this.training = response
+          this.training = response;
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onGetAvailableTraining() {
     this.trainingService.getAvailableTraining()
       .subscribe({
         next: (response) => {
-          this.title = "AVAILABLE TRAINING"
-          this.training = response
+          this.title = "AVAILABLE TRAINING";
+          this.training = response;
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onGetAllCategories() {
     this.categoryService.getAllCategories()
       .subscribe({
         next: (data) => {
-          this.categories = data
+          this.categories = data;
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   getPhoto(id) {
@@ -72,11 +73,11 @@ export class TrainingComponent implements OnInit {
     this.trainingService.getTrainingByCategory(category)
       .subscribe({
         next: (response) => {
-          this.title = "TRAINING of Category: " + category.name.toUpperCase()
-          this.training = response
+          this.title = "TRAINING of Category: " + category.name.toUpperCase();
+          this.training = response;
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 
   onEditPhoto(training) {
@@ -102,18 +103,18 @@ export class TrainingComponent implements OnInit {
           }
         },
         error: (error) => {
-          alert("Problem on upload photo" + JSON.parse(error.error).message)
+          alert("Problem on upload photo" + JSON.parse(error.error).message);
         }
-      })
+      });
   }
 
   isAdmin() {
-    return this.authenticationService.isAdmin()
+    return this.authenticationService.isAdmin();
   }
 
   onDetailsTraining(training: Training) {
-    let url = btoa(training._links.training.href)
+    let url = btoa(training._links.training.href);
 
-    this.router.navigateByUrl("training-details/" + url)
+    this.router.navigateByUrl("training-details/" + url);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {CatalogueService} from "../../services/catalogue.service";
 import {Router} from "@angular/router";
+
+import {CatalogueService} from "../../services/catalogue.service";
 
 @Component({
   selector: 'app-register',
@@ -12,8 +13,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private catalogueService: CatalogueService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSaveUser(value) {
     let url = this.catalogueService.host + "/register"
@@ -34,10 +34,10 @@ export class RegisterComponent implements OnInit {
     this.catalogueService.addUser(url, user)
       .subscribe({
         next: (data) => {
-          alert("USER ADDED !")
+          alert("USER ADDED !");
           this.router.navigate(['']);
         },
         error: (error) => console.error(error)
-      })
+      });
   }
 }

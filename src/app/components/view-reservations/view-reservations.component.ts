@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {ReservationService} from "../../services/reservation.service";
 
 @Component({
@@ -10,6 +11,7 @@ export class ViewReservationsComponent implements OnInit {
   reservations;
   employee;
   training;
+
   constructor(private reservationService: ReservationService) { }
 
   ngOnInit(): void {
@@ -19,7 +21,7 @@ export class ViewReservationsComponent implements OnInit {
           this.reservations = reservations;
         },
         error: (error) => console.log(error)
-      })
+      });
   }
 
   getEmployeeInfos(href: string) {
@@ -29,7 +31,8 @@ export class ViewReservationsComponent implements OnInit {
           this.employee = employee;
         },
         error: (error) => console.log(error)
-      })
+      });
+
     return this.employeeToString();
   }
 
@@ -40,7 +43,8 @@ export class ViewReservationsComponent implements OnInit {
           this.training = training;
         },
         error: (error) => console.log(error)
-      })
+      });
+
     return this.trainingToString();
   }
 
