@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Traineeship</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin()">
+        <a class="nav-link" routerLink="addCategories">Add Categories</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin()">
+        <a class="nav-link" routerLink="addTraining">Add Training</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin()">
+        <a class="nav-link" routerLink="viewReservations">View Reservations</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+      <li>
+        <a *ngIf="!isAuthenticated()" id="login" routerLink="/login">
+          <i class="fa fa-sign-in"></i>
+        </a>
+        <a *ngIf="isAuthenticated()" id="logout" (click)="logout()" routerLink="/login">
+          {{username}}
+          <i class="fa fa-sign-out"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,60 @@
+<nav class="p-0 navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="ms-1 navbar navbar-nav">
+    <li>
+      <button (click)="onGetAllTraining()" class="me-1 btn btn-outline-info">All</button>
+    </li>
+    <li>
+      <button (click)="onGetAvailableTraining()" class="me-1 btn btn-outline-info">Available</button>
+    </li>
+    <ul class="navbar navbar-nav" *ngIf="categories">
+      <li *ngFor="let c of categories._embedded.categories">
+        <button (click)="onTrainingByCategory(c)" class="me-1 btn btn-outline-info">{{c.name}}</button>
+      </li>
+    </ul>
+  </ul>
+</nav>
+<h1 id="title">{{title}}</h1>
+<div class="p-1 card-group row" *ngIf="training">
+    <div class="col-sm-4" *ngFor="let t of training._embedded.trainings">
+      <div class="card m-2" trainingBorderCard="#3A9BDC">
+        <div class="badge bg-secondary text-center card-header fs-4 fw-bolder">{{t.title}}</div>
+        <div class="card-body" (click)="onDetailsTraining(t)">
+          <table>
+            <tr>
+              <td style="padding-bottom: 1em;">
+                <img height="100" src= "{{ getPhoto(t.id) }}"/>
+              </td>
+              <td style="padding-bottom: 1em;">
+                <i>{{t.shortDescription}}</i>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="width:130px" class="p-1 rounded-pill {{ t.available | availableColor }}">
+                  {{t.available ? 'available' : 'unavailable'}}
+                </span>
+              </td>
+              <td>
+                <div><i class="fa fa-graduation-cap fw-bolder ms-1"> &nbsp;Level:</i> {{t.level}}</div>
+                <br>
+                <span><i class="fa fa-clock-o fw-bolder ms-1"> &nbsp; &nbsp;Duration:</i> {{t.duration}} H</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="edit" *ngIf="isAdmin()">
+          <button class="fa fa-edit" (click)="onEditPhoto(t)"></button>
+        </div>
+        <div *ngIf="editPhoto && currentTraining == t" style="margin-top: -18px;" class="bg-light card-footer">
+          <input style="font-size:10px;" type="file" (change)="onSelectedFile($event)"/>
+          <button id="upload" class="btn me-1" (click)="uploadPhoto()"><li class="fa fa-upload"></li></button>
+          <br>
+          <div *ngIf="progress" class="progress mt-2" style="height: 2px;">
+            <div class="progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

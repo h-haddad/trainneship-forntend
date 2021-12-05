@@ -1,0 +1,90 @@
+<div class="container pb-1 mt-2 border border-secondary" *ngIf="trainingFormGroup">
+  <form [formGroup]="trainingFormGroup">
+    <div class="mb-3">
+      <label class="fs-5 fst-italic font-monospace">Title:</label>
+      <input type = "text" class="form-control" formControlName="title"
+             [ngClass]="{'is-valid' : trainingFormGroup.controls['title']?.valid,
+         'is-invalid': trainingFormGroup.controls['title']?.invalid}"/>
+
+      <div *ngIf="trainingFormGroup.controls['title'].errors?.['required']" class="invalid-feedback">
+        Title is Required
+      </div>
+
+      <div *ngIf="trainingFormGroup.controls['title'].errors?.['minlength']" class="invalid-feedback">
+        Title must be at least 4 characters long.
+      </div>
+
+      <div *ngIf="trainingFormGroup.controls['title'].errors?.['pattern']" class="invalid-feedback">
+        Please match the request format (no numbers in title).
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="fs-5 fst-italic font-monospace">Short Description:</label>
+      <input type = "text" class="form-control" formControlName="shortDescription"
+             [ngClass]="{'is-valid' : trainingFormGroup.controls['shortDescription']?.valid,
+             'is-invalid': trainingFormGroup.controls['shortDescription']?.invalid}"/>
+
+      <div *ngIf="trainingFormGroup.controls['shortDescription'].errors?.['required']" class="invalid-feedback">
+        Short Description is Required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="fs-5 fst-italic font-monospace">Description:</label>
+      <textarea rows="5" class="form-control" formControlName="description"
+                [ngClass]="{'is-valid' : trainingFormGroup.controls['description']?.valid,
+             'is-invalid': trainingFormGroup.controls['description']?.invalid}">
+      </textarea>
+
+      <div *ngIf="trainingFormGroup.controls['description'].errors?.['required']" class="invalid-feedback">
+        Description is Required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="fs-5 fst-italic font-monospace">Level:</label>
+      <br>
+      <select formControlName="level" class="is-valid">
+        <option *ngFor="let l of levels" [ngValue]="l" >{{l}}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="fs-5 fst-italic font-monospace">Duration:</label>
+      <input maxlength="2" type = "number" class="form-control" formControlName="duration"
+             [ngClass]="{'is-valid' : trainingFormGroup.controls['duration']?.valid,
+             'is-invalid': trainingFormGroup.controls['duration']?.invalid}"/>
+
+      <div *ngIf="trainingFormGroup.controls['duration'].errors?.['max']" class="invalid-feedback">
+        Maximum is 50 Hours.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="fs-5 fst-italic font-monospace">Available:</label>
+      <div class="form-check form-switch">
+        <input type="checkbox" class="form-check-input" formControlName="available"/>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="fs-5 fst-italic font-monospace">Category:</label>
+      <br>
+      <select formControlName="category" class="is-valid">
+        <option *ngFor="let c of categories._embedded.categories" [ngValue]="c._links.category.href" >
+          {{c.name}}
+        </option>
+      </select>
+
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-primary" [disabled]="trainingFormGroup.invalid" (click)="onSaveTraining()">Save</button>
+    </div>
+  </form>
+</div>
+
+
+
+

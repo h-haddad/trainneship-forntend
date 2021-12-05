@@ -1,0 +1,73 @@
+<div class="p-1 card-group row" *ngIf="currentTraining">
+  <div class="details">
+    <div class="card m-7">
+      <div class="badge bg-secondary text-center card-header fs-4 fw-bolder">
+        Training File: {{currentTraining.title}}
+        <span style="float:right;" class="edit" *ngIf="isAdmin()">
+          <button class="btn btn-secondary fa fa-edit" (click)="onEditTraining(currentTraining)"></button>
+          <button class="btn btn-secondary fa fa-trash-o" (click)="onDeleteTraining(currentTraining)"></button>
+        </span>
+      </div>
+      <div class="card-body">
+        <table>
+          <tr>
+            <td rowspan="2" style="padding-bottom: 1em;">
+              <img height="300" src= "{{ getPhoto(currentTraining.id) }}"/>
+            </td>
+            <td style="padding-bottom: 1em;">
+              <i>{{currentTraining.shortDescription}}</i>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding-bottom: 1em;">
+              <i><b>Description:</b> {{currentTraining.description}}</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="width:130px" class="p-1 rounded-pill {{ currentTraining.available | availableColor }}">
+                {{currentTraining.available ? 'available' : 'unavailable'}}
+              </span>
+            </td>
+            <td>
+              <div><i class="fa fa-graduation-cap fw-bolder ms-1"> &nbsp;Level:</i> {{currentTraining.level}}</div>
+              <br>
+              <span><i class="fa fa-clock-o fw-bolder ms-1"> &nbsp; &nbsp;Duration:</i> {{currentTraining.duration}} H</span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" *ngIf="!editPhoto">
+              <div class="edit mt-2" *ngIf="isAdmin()">
+                <button style="width:100%" class="btn btn-dark fa fa-file-image-o" (click)="onEditPhoto(currentTraining)"></button>
+              </div>
+            </td>
+            <td colspan="2">
+              <div class="upload-block bg-dark pt-1 pb-1 mt-2 " *ngIf="editPhoto">
+                <input style="font-size:10px;" type="file" (change)="onSelectedFile($event)"/>
+                <button id="upload" class="btn me-1" (click)="uploadPhoto()"><li class="fa fa-upload"></li></button>
+                <br>
+                <div *ngIf="progress" class="progress mt-2" style="height: 10px;">
+                  <div class="progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress"
+                       aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td  colspan="2">
+              <div id="book" *ngIf="!isAdmin()">
+                <button class ="btn" [ngClass]="{'btn-primary' : !isReserved, 'btn-danger' : isReserved}"
+                        [disabled]="!currentTraining.available || isReserved"
+                        (click)="bookTraining(currentTraining.id)">
+                  {{!isReserved ? 'Book' : 'Reserved'}}
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>

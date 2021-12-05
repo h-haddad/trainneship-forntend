@@ -1,0 +1,32 @@
+.details {
+  width: auto !important;
+  margin: 0 auto;
+}
+#upload {
+  width:50%;
+  font-size:12px;
+  color:white;
+  background-color:#98BAE7;
+}
+
+.upload-block {
+  text-align:center;
+}
+
+@media (max-width: 600px) {
+  .row > * {
+    width: 500px;
+    height: 370px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+#book {
+  text-align: center;
+}
+

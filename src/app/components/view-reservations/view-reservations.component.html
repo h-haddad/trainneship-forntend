@@ -1,0 +1,18 @@
+<table class="table" *ngIf="reservations">
+  <thead>
+  <tr>
+    <th>Employee Informations</th>
+    <th>Training Informations</th>
+    <th>Date of booking</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let r of reservations._embedded.reservations">
+    <td>{{getEmployeeInfos(r._links.employee.href)}}</td>
+    <td>{{getTrainingInfos(r._links.training.href)}}</td>
+    <td>{{r.reservationDate | date : 'MMM d, y, h:mm:ss a'}}</td>
+
+
+  </tr>
+  </tbody>
+</table>

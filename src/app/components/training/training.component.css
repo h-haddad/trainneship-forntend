@@ -1,0 +1,38 @@
+@media (max-width: 1150px) {
+  .row > * {
+    width: 500px;
+    height: 370px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  #upload {
+    width: 220px !important;
+  }
+}
+
+#title {
+  color: #7c795d;
+  font-family: 'Trocchi', serif;
+  font-size: 55px;
+  font-weight: normal;
+  line-height: 48px;
+  text-align: center;
+}
+
+div.car > * {
+  font-size: 0.875rem;
+  font-family: Montserrat;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+#upload {
+  width:180px;
+  font-size:12px;
+  color:white;
+  background-color:#98BAE7;
+}
+
+.edit button {
+  width: 100%;
+}
